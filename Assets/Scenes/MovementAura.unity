@@ -1304,6 +1304,10 @@ PrefabInstance:
       propertyPath: _faceExpressions
       value: 
       objectReference: {fileID: 338789857}
+    - target: {fileID: 5025101211908423392, guid: ba603d7826a9d9344a7c045f1a073390, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8865039754712819280, guid: ba603d7826a9d9344a7c045f1a073390, type: 3}
       propertyPath: m_Enabled
       value: 1

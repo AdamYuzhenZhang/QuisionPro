@@ -5,9 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MultiplayerTest.unity
     guid: d33af41be566f0b4da62363354af0ed9
+  - enabled: 1
+    path: Assets/Scenes/MovementAura.unity
+    guid: 8029ecc204491674cb1729b32b5903a9
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 35e7ab6dff8122743aa1c1b2fbdf5cfd, type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: c7b950e636d94534290879ea8e4abdfd, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7727af7736441b04680007554f9f9c4f, type: 2}
