@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,7 +9,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private string m_QuestSceneName;
     [SerializeField] private string m_IOSSceneName;
 
-    private void Awake()
+    public void LoadScene()
     {
         if (NetworkManager.Singleton.IsHost) SceneManager.LoadSceneAsync(m_QuestSceneName, LoadSceneMode.Additive);
         else
