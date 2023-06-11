@@ -613,7 +613,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d13ed093e2be1a42a4734fa9476f22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSceneName: MovementAura
+  m_IsQuest: 0
+  m_QuestSceneName: QuestScene
+  m_IOSSceneName: IOSScene
 --- !u!1 &654440641
 GameObject:
   m_ObjectHideFlags: 0

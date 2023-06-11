@@ -3,10 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] private string m_TargetSceneName;
+    [SerializeField] private bool m_IsQuest;
+    [SerializeField] private string m_QuestSceneName;
+    [SerializeField] private string m_IOSSceneName;
 
     private void Awake()
     {
-        //SceneManager.LoadSceneAsync(m_TargetSceneName, LoadSceneMode.Additive);
+        if (m_IsQuest) SceneManager.LoadSceneAsync(m_QuestSceneName, LoadSceneMode.Additive);
+        else SceneManager.LoadSceneAsync(m_IOSSceneName, LoadSceneMode.Additive);
     }
 }
