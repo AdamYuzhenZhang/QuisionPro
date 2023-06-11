@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +10,11 @@ public class SceneLoader : MonoBehaviour
 
     private void Awake()
     {
-        if (m_IsQuest) SceneManager.LoadSceneAsync(m_QuestSceneName, LoadSceneMode.Additive);
-        else SceneManager.LoadSceneAsync(m_IOSSceneName, LoadSceneMode.Additive);
+        if (NetworkManager.Singleton.IsHost) SceneManager.LoadSceneAsync(m_QuestSceneName, LoadSceneMode.Additive);
+        else
+        {
+            SceneManager.UnloadSceneAsync(m_QuestSceneName);
+            SceneManager.LoadSceneAsync(m_IOSSceneName, LoadSceneMode.Additive);
+        }
     }
 }
