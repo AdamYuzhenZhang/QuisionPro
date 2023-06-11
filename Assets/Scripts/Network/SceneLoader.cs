@@ -14,7 +14,7 @@ public class SceneLoader : MonoBehaviour
         if (NetworkManager.Singleton.IsHost) SceneManager.LoadSceneAsync(m_QuestSceneName, LoadSceneMode.Additive);
         else
         {
-            SceneManager.UnloadSceneAsync(m_QuestSceneName);
+            //SceneManager.UnloadSceneAsync(m_QuestSceneName);
             SceneManager.LoadSceneAsync(m_IOSSceneName, LoadSceneMode.Additive);
         }
     }
