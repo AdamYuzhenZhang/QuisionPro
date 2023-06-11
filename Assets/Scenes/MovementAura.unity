@@ -210,6 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 92042408}
+  - component: {fileID: 92042409}
   m_Layer: 0
   m_Name: MyExpressionReader
   m_TagString: Untagged
@@ -232,6 +233,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &92042409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92042407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2dcd1fddd9a5a4a904fd1968e6daf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FaceExpressions: {fileID: 338789857}
 --- !u!4 &295800113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8578487884311766621, guid: 1ac7885a83f6c4741addf95e0ceea891, type: 3}

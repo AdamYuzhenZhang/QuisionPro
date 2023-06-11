@@ -21,7 +21,7 @@ public class NetworkController : MonoBehaviour
 
 	void Start()
 	{
-		Debug.Log(GetLocalIPAddress());
+		//Debug.Log(GetLocalIPAddress());
 		ipAddress = "0.0.0.0";
 		SetIpAddress(); // Set the Ip to the above address
 		pcAssigned = false;
