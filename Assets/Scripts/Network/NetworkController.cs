@@ -47,13 +47,29 @@ public class NetworkController : MonoBehaviour
 	public string GetLocalIPAddress() {
 		var host = Dns.GetHostEntry(Dns.GetHostName());
 		foreach (var ip in host.AddressList) {
-			if (ip.AddressFamily == AddressFamily.InterNetwork) {
+			if (ip.AddressFamily == AddressFamily.InterNetwork && IsWirelessIP(ip)) {
 				ipAddressText.text = ip.ToString();
 				ipAddress = ip.ToString();
 				return ip.ToString();
 			}
 		}
 		throw new System.Exception("No network adapters with an IPv4 address in the system!");
+	}
+	
+	private bool IsWirelessIP(IPAddress ipAddress)
+	{
+		// Check if the IP address belongs to a wireless interface
+		// Modify this method according to your specific requirements
+		// You can use additional criteria like the interface name or other properties
+    
+		// Example: Check if the IP address is within a specific range
+		var ipBytes = ipAddress.GetAddressBytes();
+		if (ipBytes[0] == 192 && ipBytes[1] == 168 && ipBytes[2] == 1)
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	/* Sets the Ip Address of the Connection Data in Unity Transport
