@@ -446,8 +446,16 @@ PrefabInstance:
       value: NetworkObjectForData
       objectReference: {fileID: 0}
     - target: {fileID: 7987936037232669798, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987936037232669798, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 480907905
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987936037232669798, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
+      propertyPath: ActiveSceneSynchronization
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7987936037232669799, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
       propertyPath: m_RootOrder
@@ -698,7 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d13ed093e2be1a42a4734fa9476f22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsQuest: 0
+  m_IsQuest: 1
   m_QuestSceneName: QuestScene
   m_IOSSceneName: IOSScene
   m_NetworkController: {fileID: 2091302058}
