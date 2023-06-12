@@ -10,7 +10,9 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private string m_QuestSceneName;
     [SerializeField] private string m_IOSSceneName;
 
-    [SerializeField] private NetworkController m_NetworkController;
+    [SerializeField] private GameObject m_NetworkedEyePrefab;
+
+        [SerializeField] private NetworkController m_NetworkController;
 
     [SerializeField] private GameObject m_PersistentCamera;
     [SerializeField] private GameObject m_PersistentEventSystem;
@@ -53,6 +55,8 @@ public class SceneLoader : MonoBehaviour
             Debug.Log("Is Quest");
             // automatically start host
             NetworkManager.Singleton.StartHost();
+            GameObject networkEyes = Instantiate(m_NetworkedEyePrefab);
+            networkEyes.GetComponent<NetworkObject>().Spawn();
             Debug.Log("Host Started");
             // automatically load scene
             LoadScene();
