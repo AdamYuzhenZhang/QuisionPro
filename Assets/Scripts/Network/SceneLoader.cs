@@ -25,7 +25,7 @@ public class SceneLoader : MonoBehaviour
         }
         else
         {
-            SceneManager.UnloadSceneAsync(m_QuestSceneName);
+            if (SceneManager.GetSceneByName(m_QuestSceneName).isLoaded) SceneManager.UnloadSceneAsync(m_QuestSceneName);
             SceneManager.LoadSceneAsync(m_IOSSceneName, LoadSceneMode.Additive);
         }
 
