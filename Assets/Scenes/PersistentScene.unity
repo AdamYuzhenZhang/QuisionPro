@@ -613,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d13ed093e2be1a42a4734fa9476f22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsQuest: 1
+  m_IsQuest: 0
   m_QuestSceneName: QuestScene
   m_IOSSceneName: IOSScene
   m_NetworkedEyePrefab: {fileID: 7987936037232669797, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
