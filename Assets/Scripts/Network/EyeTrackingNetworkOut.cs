@@ -35,6 +35,10 @@ public class EyeTrackingNetworkOut : MonoBehaviour
             m_RightEye.localRotation = m_RightEyeNetworked.transform.rotation;
             m_RightEye.localPosition = m_RightEyeNetworked.transform.position;
         }
+        else
+        {
+            GetNetworkedEyes();
+        }
     }
     
     private void Start()

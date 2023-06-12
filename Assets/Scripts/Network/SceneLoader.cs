@@ -18,10 +18,14 @@ public class SceneLoader : MonoBehaviour
     public void LoadScene()
     {
         Debug.Log("Load Scene");
-        if (NetworkManager.Singleton.IsHost) SceneManager.LoadSceneAsync(m_QuestSceneName, LoadSceneMode.Additive);
+        if (NetworkManager.Singleton.IsHost)
+        {
+            //NetworkManager.Singleton.SceneManager.LoadScene(m_QuestSceneName, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(m_QuestSceneName, LoadSceneMode.Additive);
+        }
         else
         {
-            //SceneManager.UnloadSceneAsync(m_QuestSceneName);
+            SceneManager.UnloadSceneAsync(m_QuestSceneName);
             SceneManager.LoadSceneAsync(m_IOSSceneName, LoadSceneMode.Additive);
         }
 
@@ -42,6 +46,7 @@ public class SceneLoader : MonoBehaviour
 
     private void Start()
     {
+        //NetworkSceneManager.RegisterSceneFilter();
         Debug.Log("Start");
         if (m_IsQuest)
         {
