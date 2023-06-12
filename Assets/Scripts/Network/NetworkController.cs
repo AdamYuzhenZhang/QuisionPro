@@ -19,6 +19,8 @@ public class NetworkController : MonoBehaviour
 	[SerializeField] string ipAddress;
 	[SerializeField] UnityTransport transport;
 
+	//public string IPAddress => ipAddress;
+
 	void Start()
 	{
 		//Debug.Log(GetLocalIPAddress());

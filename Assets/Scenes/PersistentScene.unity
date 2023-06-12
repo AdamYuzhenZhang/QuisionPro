@@ -497,6 +497,22 @@ PrefabInstance:
       propertyPath: m_TagString
       value: LeftEyeNetworked
       objectReference: {fileID: 0}
+    - target: {fileID: 7987936037394566381, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
+      propertyPath: SyncPositionX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987936037394566381, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
+      propertyPath: SyncPositionZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987936037875153472, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
+      propertyPath: SyncPositionX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987936037875153472, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
+      propertyPath: SyncPositionZ
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7987936037875153486, guid: ac465819ed4337243b81cef8e5e4a472, type: 3}
       propertyPath: m_TagString
       value: RightEyeNetworked
@@ -685,6 +701,10 @@ MonoBehaviour:
   m_IsQuest: 0
   m_QuestSceneName: QuestScene
   m_IOSSceneName: IOSScene
+  m_NetworkController: {fileID: 2091302058}
+  m_PersistentCamera: {fileID: 762521156}
+  m_PersistentEventSystem: {fileID: 682727184}
+  m_PersistentCanvas: {fileID: 1543604552}
 --- !u!1 &682727184
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,14 +849,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762521156}
-  m_LocalRotation: {x: 0.42607293, y: -0.34394643, z: 0.17930068, w: 0.8173213}
-  m_LocalPosition: {x: 4, y: 4.8, z: -3.7}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 55.066, y: -45.645, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &969454902
 GameObject:
   m_ObjectHideFlags: 0
