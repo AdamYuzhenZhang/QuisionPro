@@ -55,8 +55,8 @@ public class SceneLoader : MonoBehaviour
             Debug.Log("Is Quest");
             // automatically start host
             NetworkManager.Singleton.StartHost();
-            GameObject networkEyes = Instantiate(m_NetworkedEyePrefab);
-            networkEyes.GetComponent<NetworkObject>().Spawn();
+            //GameObject networkEyes = Instantiate(m_NetworkedEyePrefab);
+            //networkEyes.GetComponent<NetworkObject>().Spawn();
             Debug.Log("Host Started");
             // automatically load scene
             LoadScene();
