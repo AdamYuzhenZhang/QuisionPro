@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] private bool m_IsQuest;
+    //[SerializeField] private bool m_IsQuest;
     [SerializeField] private string m_QuestSceneName;
     [SerializeField] private string m_IOSSceneName;
 
@@ -50,6 +50,7 @@ public class SceneLoader : MonoBehaviour
     {
         //NetworkSceneManager.RegisterSceneFilter();
         Debug.Log("Start");
+        /*
         if (m_IsQuest)
         {
             Debug.Log("Is Quest");
@@ -64,5 +65,13 @@ public class SceneLoader : MonoBehaviour
             // display ip
             // handled in quest scripts
         }
+        */
+        
+        #if UNITY_ANDROID
+        NetworkManager.Singleton.StartHost();
+        Debug.Log("Host Started");
+        // automatically load scene
+        LoadScene();
+        #endif
     }
 }
