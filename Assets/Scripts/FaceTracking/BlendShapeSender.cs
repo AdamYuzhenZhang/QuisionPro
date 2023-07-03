@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -22,7 +23,8 @@ public struct NetworkedString : INetworkSerializable, System.IEquatable<Networke
 
     public bool Equals(NetworkedString other)
     {
-        return true;
+        if (String.Equals(other.str, str)) return true;
+        return false;
     }
 }
 
@@ -63,6 +65,7 @@ public class BlendShapeSender : NetworkBehaviour
                 // initialize blendshape value
                 SetBlendShapeValues(m_SkinnedMeshSource);
                 Weights.Value = new NetworkedString() {str = string.Join(" ", blendShapeWeight)};
+                
                 Num.Value = blendShapeNum;
                 // this is the host so can change the value of blendshapedata
                 m_HostConnected = true;
@@ -97,6 +100,7 @@ public class BlendShapeSender : NetworkBehaviour
             // change blendshape value
             SetBlendShapeValues(m_SkinnedMeshSource);
             Weights.Value = new NetworkedString() {str = string.Join(" ", blendShapeWeight)};
+            //Debug.Log(Weights.Value.str);
         }
         else if (m_ClientConnected)
         {
