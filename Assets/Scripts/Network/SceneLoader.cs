@@ -17,6 +17,18 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private GameObject m_PersistentCamera;
     [SerializeField] private GameObject m_PersistentEventSystem;
     [SerializeField] private GameObject m_PersistentCanvas;
+
+    public void LoadSceneAsync()
+    {
+        StartCoroutine(LoadSceneAfterDelay());
+    }
+
+    IEnumerator LoadSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        LoadScene();
+    }
+    
     public void LoadScene()
     {
         Debug.Log("Load Scene");
