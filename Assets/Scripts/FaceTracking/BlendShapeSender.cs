@@ -6,7 +6,7 @@ using Unity.Netcode;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class BlendShapeSender : NetworkBehaviour, INetworkSerializable
+public class BlendShapeSender : NetworkBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer m_SkinnedMeshSource;
     [SerializeField] private SkinnedMeshRenderer m_SkinnedMeshTarget;
@@ -15,12 +15,18 @@ public class BlendShapeSender : NetworkBehaviour, INetworkSerializable
     //private NativeArray<float> blendShapeWeightsArray;
     
     // network variable
-    //public BlendShapeData m_BlendShapeData = new BlendShapeData();
+    public NetworkVariable<BlendShapeData> m_BlendShapeData = new NetworkVariable<BlendShapeData>(
+        new BlendShapeData(),
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+        );
     
+    /*
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref blendShapeWeight);
     }
+    */
 
     public NetworkVariable<int> Num = new(0, NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server);
@@ -53,8 +59,10 @@ public class BlendShapeSender : NetworkBehaviour, INetworkSerializable
             {
                 // initialize blendshape value
                 SetBlendShapeValues(m_SkinnedMeshSource);
-                //m_BlendShapeData.blendShapeNum = blendShapeNum;
-                //m_BlendShapeData.blendShapeWeight = blendShapeWeight;
+                BlendShapeData data = new BlendShapeData();
+                data.blendShapeNum = blendShapeNum;
+                data.blendShapeWeight = blendShapeWeight;
+                m_BlendShapeData.Value = data;
                 
                 Num.Value = blendShapeNum;
                 //Weights.Value = blendShapeWeightsArray;
@@ -110,9 +118,9 @@ public class BlendShapeSender : NetworkBehaviour, INetworkSerializable
     
     private void AssignBlendShapeValues(SkinnedMeshRenderer skinnedMesh)
     {
-        //blendShapeNum = m_BlendShapeData.blendShapeNum;
-        //blendShapeWeight = m_BlendShapeData.blendShapeWeight;
-        for (int i = 0; i < Num.Value; i++)
+        blendShapeNum = m_BlendShapeData.Value.blendShapeNum;
+        blendShapeWeight = m_BlendShapeData.Value.blendShapeWeight;
+        for (int i = 0; i < blendShapeNum; i++)
         {
             //skinnedMesh.SetBlendShapeWeight(i, m_BlendShapeData.blendShapeWeight[i]);
             skinnedMesh.SetBlendShapeWeight(i, blendShapeWeight[i]);
