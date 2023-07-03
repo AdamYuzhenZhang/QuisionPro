@@ -8,6 +8,10 @@ public struct BlendShapeData : INetworkSerializable
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref blendShapeNum);
-        serializer.SerializeValue(ref blendShapeWeight);
+        for (int n = 0; n < blendShapeNum; ++n)
+        {
+            serializer.SerializeValue(ref blendShapeWeight[n]);
+        }
+        //serializer.SerializeValue(ref blendShapeWeight);
     }
 }
