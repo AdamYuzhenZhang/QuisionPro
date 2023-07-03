@@ -8,6 +8,8 @@ TagManager:
   - RightEyeNetworked
   - BlendShapeSource
   - BlendShapeTarget
+  - ServerViewer
+  - ClientViewer
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - HiddenMesh
   - Character
   - MirroredCharacter
-  - 
+  - EyeInteractable
   - 
   - 
   - 
