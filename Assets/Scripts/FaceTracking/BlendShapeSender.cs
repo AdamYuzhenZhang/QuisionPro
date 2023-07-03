@@ -1,10 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
-using Oculus.Movement.UI;
-using Unity.Collections;
 using Unity.Netcode;
-using UnityEditor.PackageManager;
 using UnityEngine;
+
+public struct NetworkedString : INetworkSerializable, System.IEquatable<NetworkedString>
+{
+    public string str;
+
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        if (serializer.IsReader)
+        {
+            var reader = serializer.GetFastBufferReader();
+            reader.ReadValueSafe(out str);
+        }
+        else
+        {
+            var writer = serializer.GetFastBufferWriter();
+            writer.WriteValueSafe(str);
+        }
+    }
+
+    public bool Equals(NetworkedString other)
+    {
+        return true;
+    }
+}
 
 public class BlendShapeSender : NetworkBehaviour
 {
@@ -12,38 +32,21 @@ public class BlendShapeSender : NetworkBehaviour
     [SerializeField] private SkinnedMeshRenderer m_SkinnedMeshTarget;
     [SerializeField] private int blendShapeNum = 0;
     [SerializeField] private float[] blendShapeWeight = new []{1f};
-    //private NativeArray<float> blendShapeWeightsArray;
     
-    // network variable
-    public NetworkVariable<BlendShapeData> m_BlendShapeData = new NetworkVariable<BlendShapeData>(
-        new BlendShapeData(),
-        NetworkVariableReadPermission.Everyone,
-        NetworkVariableWritePermission.Server
-        );
-    
-    /*
-    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
-    {
-        serializer.SerializeValue(ref blendShapeWeight);
-    }
-    */
-
     public NetworkVariable<int> Num = new(0, NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server);
 
-    //public NetworkVariable<NativeArray<float>> Weights = new NetworkVariable<NativeArray<float>>();
+    public NetworkVariable<NetworkedString> Weights = new NetworkVariable<NetworkedString>(
+        new NetworkedString()
+        {
+            str = ""
+        });
 
     [SerializeField] private bool m_HostConnected;
     [SerializeField] private bool m_ClientConnected;
 
-    private void Start()
-    {
-        
-    }
-    
     public override void OnNetworkSpawn()
     {
-        //Debug.Log("Network !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         StartCoroutine(DelayAfterNetworkSpawn());
     }
 
@@ -59,13 +62,8 @@ public class BlendShapeSender : NetworkBehaviour
             {
                 // initialize blendshape value
                 SetBlendShapeValues(m_SkinnedMeshSource);
-                BlendShapeData data = new BlendShapeData();
-                data.blendShapeNum = blendShapeNum;
-                data.blendShapeWeight = blendShapeWeight;
-                m_BlendShapeData.Value = data;
-                
+                Weights.Value = new NetworkedString() {str = string.Join(" ", blendShapeWeight)};
                 Num.Value = blendShapeNum;
-                //Weights.Value = blendShapeWeightsArray;
                 // this is the host so can change the value of blendshapedata
                 m_HostConnected = true;
             }
@@ -82,20 +80,14 @@ public class BlendShapeSender : NetworkBehaviour
     private void SetBlendShapeValues(SkinnedMeshRenderer skinnedMesh)
     {
         blendShapeNum = skinnedMesh.sharedMesh.blendShapeCount;
-
         // Initialize the blend shape weights array
         float[] weights = new float[blendShapeNum];
-        //NativeArray<float> weightsArray = new NativeArray<float>(blendShapeNum, Allocator.Persistent);
-        
         // Retrieve and store the blend shape weights
         for (int i = 0; i < blendShapeNum; i++)
         {
             weights[i] = skinnedMesh.GetBlendShapeWeight(i);
-            //weightsArray[i] = skinnedMesh.GetBlendShapeWeight(i);
         }
-
         blendShapeWeight = weights;
-        //blendShapeWeightsArray = weightsArray;
     }
 
     private void Update()
@@ -104,10 +96,7 @@ public class BlendShapeSender : NetworkBehaviour
         {
             // change blendshape value
             SetBlendShapeValues(m_SkinnedMeshSource);
-            //m_BlendShapeData.blendShapeWeight = blendShapeWeight;
-            //Weights.Value = blendShapeWeightsArray;
-
-            //SendBlendShapeMessage();
+            Weights.Value = new NetworkedString() {str = string.Join(" ", blendShapeWeight)};
         }
         else if (m_ClientConnected)
         {
@@ -115,16 +104,13 @@ public class BlendShapeSender : NetworkBehaviour
             AssignBlendShapeValues(m_SkinnedMeshTarget);
         }
     }
-    
+
     private void AssignBlendShapeValues(SkinnedMeshRenderer skinnedMesh)
     {
-        blendShapeNum = m_BlendShapeData.Value.blendShapeNum;
-        blendShapeWeight = m_BlendShapeData.Value.blendShapeWeight;
-        for (int i = 0; i < blendShapeNum; i++)
+        string[] s = Weights.Value.str.Split(' ');
+        for (int i = 0; i < Num.Value; i++)
         {
-            //skinnedMesh.SetBlendShapeWeight(i, m_BlendShapeData.blendShapeWeight[i]);
-            skinnedMesh.SetBlendShapeWeight(i, blendShapeWeight[i]);
-            //skinnedMesh.SetBlendShapeWeight(i, Weights.Value[i]);
+            skinnedMesh.SetBlendShapeWeight(i, float.Parse(s[i]));
         }
     }
 
