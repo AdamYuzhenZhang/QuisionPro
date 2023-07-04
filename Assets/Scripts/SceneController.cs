@@ -1,10 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
+    private void Awake()
+    {
+        // Disable screen timeout
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+    }
+    
     // stores the left eye and right eye
     private GameObject m_LeftEye;
     private GameObject m_RightEye;
