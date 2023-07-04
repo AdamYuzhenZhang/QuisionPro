@@ -29,6 +29,23 @@ public class ModelController : MonoBehaviour
         m_ActiveIndex = index;
         TurnOnActiveModel();
     }
+    
+    public void NextModel()
+    {
+        if (m_ActiveIndex < m_Models.Length - 1)
+        {
+            m_ActiveIndex++;
+            TurnOnActiveModel();
+        }
+    }
+    public void PreviousModel()
+    {
+        if (m_ActiveIndex > 0)
+        {
+            m_ActiveIndex--;
+            TurnOnActiveModel();
+        }
+    }
 
     private void Start()
     {

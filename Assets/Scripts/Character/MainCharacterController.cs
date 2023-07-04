@@ -52,6 +52,23 @@ public class MainCharacterController : MonoBehaviour
         UpdateActiveCharacterValues();
     }
 
+    public void NextCharacter()
+    {
+        if (m_ActiveIndex < m_CharacterControllers.Length - 1)
+        {
+            m_ActiveIndex++;
+            UpdateActiveCharacter();
+        }
+    }
+    public void PreviousCharacter()
+    {
+        if (m_ActiveIndex > 0)
+        {
+            m_ActiveIndex--;
+            UpdateActiveCharacter();
+        }
+    }
+
     private void Start()
     {
         ChangeCharacter(0);
