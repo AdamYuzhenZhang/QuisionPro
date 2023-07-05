@@ -10,6 +10,7 @@ TagManager:
   - BlendShapeTarget
   - ServerViewer
   - ClientViewer
+  - Waypoint
   layers:
   - Default
   - TransparentFX

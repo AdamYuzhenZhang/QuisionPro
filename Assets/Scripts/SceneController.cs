@@ -26,6 +26,9 @@ public class SceneController : MonoBehaviour
 
     private NetworkSystemController m_NetworkSystemController;
 
+    private bool m_AutoResetWhenNoEyes;
+    [SerializeField] private Transform m_ViewerResetTransform;
+
     private void Start()
     {
         m_NetworkSystemController = FindObjectOfType<NetworkSystemController>();
@@ -40,11 +43,23 @@ public class SceneController : MonoBehaviour
             m_ViewerCamRoot.transform.position = new Vector3(-eyePos.x, eyePos.y, eyePos.z);
             //m_ViewerCamRoot.transform.position = LeftEye.transform.position;
             //m_ViewerCamRoot.transform.rotation = LeftEye.transform.rotation;
-            if (m_NetworkSystemController) 
-                m_NetworkSystemController.UpdateViewerPosition(m_ViewerCamRoot.transform.localPosition);
+            //if (m_NetworkSystemController) 
+            //    m_NetworkSystemController.UpdateViewerPosition(m_ViewerCamRoot.transform.localPosition);
+        }
+        else if (m_AutoResetWhenNoEyes)
+        {
+            m_ViewerCamRoot.transform.position = m_ViewerResetTransform.position;
+
+            //if (m_NetworkSystemController) 
+            //    m_NetworkSystemController.UpdateViewerPosition(m_ViewerCamRoot.transform.localPosition);
         }
         
         MatchSceneRotation();
+    }
+
+    public void ToggleAutoReset()
+    {
+        m_AutoResetWhenNoEyes = !m_AutoResetWhenNoEyes;
     }
     
     
