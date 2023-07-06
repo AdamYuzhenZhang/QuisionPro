@@ -31,7 +31,10 @@ public class CatMover : MonoBehaviour
             // Rotate towards the target
             Vector3 direction = m_TargetLocalPos - m_StartLocalPos;
             Quaternion targetRotation = Quaternion.LookRotation(direction, transform.up);
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Debug.Log(targetRotation.eulerAngles);
+            transform.localRotation = Quaternion.Euler(0f,
+                Quaternion.Slerp(transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime).eulerAngles.y,
+                0f);
             
             if (t < 1.0f)
             {
@@ -61,8 +64,8 @@ public class CatMover : MonoBehaviour
         m_TargetLocalPos = target.localPosition;
         distance = Vector3.Distance(m_StartLocalPos, m_TargetLocalPos);
         
-        Vector3 direction = m_TargetLocalPos - m_StartLocalPos;
-        Quaternion targetRotation = Quaternion.LookRotation(direction, transform.up);
+        //Vector3 direction = m_TargetLocalPos - m_StartLocalPos;
+        //Quaternion targetRotation = Quaternion.LookRotation(direction, transform.up);
         //transform.localRotation = targetRotation;
 
     }
