@@ -64,11 +64,9 @@ public class SceneController : MonoBehaviour
             }
             
         }
-        
-        if (!visible && m_AutoResetWhenNoEyes)
-        {
-            m_ViewerCamRoot.transform.position = m_ViewerResetTransform.position;
 
+        if (!visible)
+        {
             if (m_AutoOffScreen)
             {
                 if (!m_ScreenTurnedOff)
@@ -77,11 +75,12 @@ public class SceneController : MonoBehaviour
                     m_ScreenBeforeOff = m_ModelController.GetActiveIndex();
                     m_ModelController.ChangeToModel(m_OffScreenIdx);
                 }
-                
             }
 
-            //if (m_NetworkSystemController) 
-            //    m_NetworkSystemController.UpdateViewerPosition(m_ViewerCamRoot.transform.localPosition);
+            if (m_AutoResetWhenNoEyes)
+            {
+                m_ViewerCamRoot.transform.position = m_ViewerResetTransform.position;
+            }
         }
         
         MatchSceneRotation();
