@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6756408129527796278}
   - component: {fileID: 6756408129527796279}
   - component: {fileID: 6756408129527796276}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6756408130823043059}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EyePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
