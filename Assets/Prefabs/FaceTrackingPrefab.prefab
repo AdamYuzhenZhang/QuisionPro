@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5620033283524181580}
   - component: {fileID: 5620033283524181583}
   - component: {fileID: 5620033283524181582}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FaceTrackingPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

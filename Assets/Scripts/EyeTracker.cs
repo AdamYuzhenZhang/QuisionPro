@@ -14,6 +14,8 @@ public class EyeTracker : MonoBehaviour
     private GameObject m_LeftEye;
     private GameObject m_RightEye;
     private ARFace m_ARFace;
+
+    private SceneController m_SceneController;
     //private XRFaceSubsystem m_XRFaceSubSystem;
     //[SerializeField] private TextMeshProUGUI m_DebugText;
 
@@ -66,6 +68,13 @@ public class EyeTracker : MonoBehaviour
         bool visible = (m_ARFace.trackingState == TrackingState.Tracking) &&
                        (ARSession.state > ARSessionState.Ready);
         SetVisibility(visible);
+        
+        // find scene controller
+        if (m_SceneController == null) m_SceneController = FindObjectOfType<SceneController>();
+        else
+        {
+            m_SceneController.UpdateWithARFace(visible);
+        }
     }
 
     private void SetVisibility(bool isVisible)

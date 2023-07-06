@@ -27,6 +27,7 @@ public class SceneController : MonoBehaviour
     private NetworkSystemController m_NetworkSystemController;
 
     private bool m_AutoResetWhenNoEyes;
+    
     [SerializeField] private Transform m_ViewerResetTransform;
 
     private void Start()
@@ -36,8 +37,13 @@ public class SceneController : MonoBehaviour
 
     private void Update()
     {
+        
+    }
+
+    public void UpdateWithARFace(bool visible)
+    {
         // move camera to left eye if it exists
-        if (LeftEye)
+        if (LeftEye && visible)
         {
             Vector3 eyePos = LeftEye.transform.position;
             m_ViewerCamRoot.transform.position = new Vector3(-eyePos.x, eyePos.y, eyePos.z);
@@ -46,7 +52,8 @@ public class SceneController : MonoBehaviour
             //if (m_NetworkSystemController) 
             //    m_NetworkSystemController.UpdateViewerPosition(m_ViewerCamRoot.transform.localPosition);
         }
-        else if (m_AutoResetWhenNoEyes)
+        
+        if (!visible && m_AutoResetWhenNoEyes)
         {
             m_ViewerCamRoot.transform.position = m_ViewerResetTransform.position;
 
