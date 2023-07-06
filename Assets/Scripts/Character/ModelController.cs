@@ -10,6 +10,8 @@ public class ModelController : MonoBehaviour
     [SerializeField] private GameObject[] m_Models;
     private int m_ActiveIndex;
 
+    public int GetActiveIndex() { return m_ActiveIndex; }
+
     private void DisableAllModels()
     {
         foreach (GameObject m in m_Models)

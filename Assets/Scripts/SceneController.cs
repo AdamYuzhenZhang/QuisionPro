@@ -26,8 +26,13 @@ public class SceneController : MonoBehaviour
 
     private NetworkSystemController m_NetworkSystemController;
 
-    private bool m_AutoResetWhenNoEyes;
-    
+    private bool m_AutoResetWhenNoEyes = true;
+    private bool m_AutoOffScreen = false;
+    private int m_ScreenBeforeOff;
+    private bool m_ScreenTurnedOff;
+    [SerializeField] private ModelController m_ModelController;
+    [SerializeField] private int m_OffScreenIdx;
+
     [SerializeField] private Transform m_ViewerResetTransform;
 
     private void Start()
@@ -51,11 +56,28 @@ public class SceneController : MonoBehaviour
             //m_ViewerCamRoot.transform.rotation = LeftEye.transform.rotation;
             //if (m_NetworkSystemController) 
             //    m_NetworkSystemController.UpdateViewerPosition(m_ViewerCamRoot.transform.localPosition);
+            if (m_ScreenTurnedOff)
+            {
+                m_ScreenTurnedOff = false;
+                m_ModelController.ChangeToModel(m_ScreenBeforeOff);
+            }
+            
         }
         
         if (!visible && m_AutoResetWhenNoEyes)
         {
             m_ViewerCamRoot.transform.position = m_ViewerResetTransform.position;
+
+            if (m_AutoOffScreen)
+            {
+                if (!m_ScreenTurnedOff)
+                {
+                    m_ScreenTurnedOff = true;
+                    m_ScreenBeforeOff = m_ModelController.GetActiveIndex();
+                    m_ModelController.ChangeToModel(m_OffScreenIdx);
+                }
+                
+            }
 
             //if (m_NetworkSystemController) 
             //    m_NetworkSystemController.UpdateViewerPosition(m_ViewerCamRoot.transform.localPosition);
@@ -68,8 +90,12 @@ public class SceneController : MonoBehaviour
     {
         m_AutoResetWhenNoEyes = !m_AutoResetWhenNoEyes;
     }
-    
-    
+    public void ToggleAutoOffScreen()
+    {
+        m_AutoOffScreen = !m_AutoOffScreen;
+    }
+
+
     // match scene rotation
     [SerializeField] private GameObject m_SceneRoot;
     [SerializeField] private GameObject m_ARCam;
