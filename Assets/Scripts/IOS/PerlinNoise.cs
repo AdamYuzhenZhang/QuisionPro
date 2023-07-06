@@ -13,6 +13,7 @@ public class PerlinNoise : MonoBehaviour
     [SerializeField] private float offsetY;
     [SerializeField] private float rateX;
     [SerializeField] private float rateY;
+    [SerializeField] private float textureScale = 0.01f;
 
     [SerializeField] private Color colorA;
     [SerializeField] private Color colorB;
@@ -21,19 +22,49 @@ public class PerlinNoise : MonoBehaviour
     private float timer;
     
     private Renderer renderer;
+    [SerializeField] private int m_Idx;
     private void Start()
     {
+        //m_TextureGenerator = FindObjectOfType<TextureGenerator>();
         renderer = GetComponent<Renderer>();
+        GetTextureFromGenerator(m_Idx);
+        //renderer.material.mainTexture = GenerateTexture();
+        renderer.material.mainTexture = texture;
+        renderer.material.mainTextureScale = Vector2.one * textureScale;
+    }
+
+    [SerializeField] private TextureGenerator m_TextureGenerator;
+    private void GetTextureFromGenerator(int i)
+    {
+        if (!m_TextureGenerator) return;
+        switch (i)
+        {
+            case 1:
+                texture = m_TextureGenerator.Texture1;
+                break;
+            case 2:
+                texture = m_TextureGenerator.Texture2;
+                break;
+            case 3:
+                texture = m_TextureGenerator.Texture3;
+                break;
+        }
     }
 
     private void Update()
     {
         if (offsetX > 10000f) offsetX = 0;
         if (offsetY > 10000f) offsetY = 0;
-        offsetX += rateX * Time.deltaTime;
-        offsetY += rateY * Time.deltaTime;
-        renderer.material.mainTexture = GenerateTexture();
+        offsetX += rateX * Time.deltaTime * textureScale;
+        offsetY += rateY * Time.deltaTime * textureScale;
+        //renderer.material.mainTexture = GenerateTexture();
         LerpColor();
+        UpdateUV();
+    }
+
+    private void UpdateUV()
+    {
+        renderer.material.mainTextureOffset = new Vector2(offsetX, offsetY);
     }
 
     private void LerpColor()
@@ -62,7 +93,6 @@ public class PerlinNoise : MonoBehaviour
     }
 
     private Texture2D texture;
-
     Texture2D GenerateTexture()
     {
         texture = new Texture2D(width, height);

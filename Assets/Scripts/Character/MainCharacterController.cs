@@ -59,12 +59,22 @@ public class MainCharacterController : MonoBehaviour
             m_ActiveIndex++;
             UpdateActiveCharacter();
         }
+        else
+        {
+            m_ActiveIndex = 0;
+            UpdateActiveCharacter();
+        }
     }
     public void PreviousCharacter()
     {
         if (m_ActiveIndex > 0)
         {
             m_ActiveIndex--;
+            UpdateActiveCharacter();
+        }
+        else
+        {
+            m_ActiveIndex = m_CharacterControllers.Length - 1;
             UpdateActiveCharacter();
         }
     }
