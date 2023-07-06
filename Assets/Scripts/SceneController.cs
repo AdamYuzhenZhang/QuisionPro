@@ -28,6 +28,7 @@ public class SceneController : MonoBehaviour
 
     private bool m_AutoResetWhenNoEyes = true;
     private bool m_AutoOffScreen = false;
+    private bool m_TrackFace = false;
     private int m_ScreenBeforeOff;
     private bool m_ScreenTurnedOff;
     [SerializeField] private ModelController m_ModelController;
@@ -48,7 +49,7 @@ public class SceneController : MonoBehaviour
     public void UpdateWithARFace(bool visible)
     {
         // move camera to left eye if it exists
-        if (LeftEye && visible)
+        if (LeftEye && visible && m_TrackFace)
         {
             Vector3 eyePos = LeftEye.transform.position;
             m_ViewerCamRoot.transform.position = new Vector3(-eyePos.x, eyePos.y, eyePos.z);
@@ -86,13 +87,17 @@ public class SceneController : MonoBehaviour
         MatchSceneRotation();
     }
 
-    public void ToggleAutoReset()
+    public void ToggleAutoReset(bool shouldReset)
     {
-        m_AutoResetWhenNoEyes = !m_AutoResetWhenNoEyes;
+        m_AutoResetWhenNoEyes = shouldReset;
     }
-    public void ToggleAutoOffScreen()
+    public void ToggleAutoOffScreen(bool shouldAutoOff)
     {
-        m_AutoOffScreen = !m_AutoOffScreen;
+        m_AutoOffScreen = shouldAutoOff;
+    }
+    public void ToggleTrackFace(bool shouldTrack)
+    {
+        m_TrackFace = shouldTrack;
     }
 
 
