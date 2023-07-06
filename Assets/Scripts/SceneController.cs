@@ -43,11 +43,17 @@ public class SceneController : MonoBehaviour
 
     private void Update()
     {
-        
+        if (!m_FaceVisible && !m_AutoResetWhenNoEyes)
+        {
+            MatchSceneRotation();
+        }
     }
+
+    private bool m_FaceVisible = false;
 
     public void UpdateWithARFace(bool visible)
     {
+        m_FaceVisible = visible;
         // move camera to left eye if it exists
         if (LeftEye && visible && m_TrackFace)
         {

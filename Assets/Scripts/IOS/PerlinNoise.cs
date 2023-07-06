@@ -60,10 +60,12 @@ public class PerlinNoise : MonoBehaviour
             renderer.material.color = blendedColor;
         }
     }
-    
+
+    private Texture2D texture;
+
     Texture2D GenerateTexture()
     {
-        Texture2D texture = new Texture2D(width, height);
+        texture = new Texture2D(width, height);
         
         for (int x = 0; x < width; x++)
         {
