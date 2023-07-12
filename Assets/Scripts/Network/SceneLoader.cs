@@ -25,10 +25,13 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadSceneAfterDelay()
     {
+        // also load a connecting screen to stop interaction with button
+        SceneManager.LoadSceneAsync("ConnectingScene", LoadSceneMode.Additive);
         yield return new WaitForSeconds(3f);
         LoadScene();
+        SceneManager.UnloadSceneAsync("ConnectingScene");
     }
-    
+
     public void LoadScene()
     {
         Debug.Log("Load Scene");
